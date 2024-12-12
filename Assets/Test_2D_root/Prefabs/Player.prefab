@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2554226769798614332}
   - component: {fileID: 6924368169585229933}
   - component: {fileID: 7068833098239340818}
-  - component: {fileID: 562677950576203041}
   - component: {fileID: 437820697980927597}
-  - component: {fileID: 7226611417192840345}
+  - component: {fileID: 770010238804751483}
+  - component: {fileID: 5208477992714316582}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -119,7 +119,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 3088827506007266809}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7cd824cf5997e49438160df433b07c10, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -145,33 +145,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.037650287, y: 1.0888572}
   m_Size: {x: 0.8336036, y: 2.0534763}
   m_Direction: 0
---- !u!50 &562677950576203041
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3088827506007266809}
-  m_BodyType: 0
-  m_Simulated: 0
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
 --- !u!114 &437820697980927597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,11 +157,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9549fd70775891448fe949433e9ae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRb: {fileID: 0}
-  speed: 12
-  jumpforce: 2
+  playerRB: {fileID: 0}
+  playerInput: {fileID: 0}
+  speed: 8
+  isFacingRight: 0
+  jumpforce: 4
   isGrounded: 0
---- !u!114 &7226611417192840345
+--- !u!114 &770010238804751483
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,13 +189,37 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 437820697980927597}
+        m_TargetAssemblyTypeName: playerControlle2D, Assembly-CSharp
+        m_MethodName: HandleMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c11d38ad-e794-43f1-b88c-7a5e8462c661
-    m_ActionName: Gameplay/Movement[/DualShock4GamepadHID/leftStick,/XInputControllerWindows/leftStick,/DualShock4GamepadHID/dpad,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+    m_ActionName: Gameplay/Movement[/DualShock4GamepadHID/leftStick,/XInputControllerWindows1/leftStick,/DualShock4GamepadHID/dpad,/XInputControllerWindows1/dpad,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 437820697980927597}
+        m_TargetAssemblyTypeName: playerControlle2D, Assembly-CSharp
+        m_MethodName: HandleJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c63cf3fc-898b-4dc0-aa8c-a8b60693bc14
-    m_ActionName: Gameplay/Jump[/DualShock4GamepadHID/buttonSouth,/XInputControllerWindows/buttonSouth,/Keyboard/space]
+    m_ActionName: Gameplay/Jump[/DualShock4GamepadHID/buttonSouth,/XInputControllerWindows1/buttonSouth,/Keyboard/space]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 5dacdb9e-25e2-4b3b-bcbe-a3b3ae4f3ede
@@ -230,3 +229,30 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!50 &5208477992714316582
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3088827506007266809}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
