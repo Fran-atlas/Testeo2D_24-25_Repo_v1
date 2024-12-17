@@ -7,6 +7,7 @@ using UnityEngine.InputSystem; //Libreria para que funcione el input sistem
 public class playerControlle2D : MonoBehaviour
 {
 
+    //Referenciaas generales
     [SerializeField] Rigidbody2D playerRB; //Ref rigibody
     [SerializeField] PlayerInput playerInput; //Ref input de player
     [SerializeField] Animator playerAnim; //Ref animator para gestion de transición animaciones 
@@ -21,6 +22,11 @@ public class playerControlle2D : MonoBehaviour
     [Header("jump Parameters")]
     public float jumpforce;
     [SerializeField] bool isGrounded;
+    //Variables para el Groundcheck
+    [SerializeField] Transform groundCheck;
+    [SerializeField] float groundCheckRadius = 01f;
+    [SerializeField] LayerMask groundLayer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +43,7 @@ public class playerControlle2D : MonoBehaviour
     void Update()
     {
         HandleAnimations();
+        GroundCheck();
 
         //Flip
         if (moveInput.x > 0)
@@ -77,6 +84,11 @@ public class playerControlle2D : MonoBehaviour
         isFacingRight = !isFacingRight; //nombre de bool = ! nombre de bool (cambio al estado contrario)
     }
 
+    void GroundCheck()
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius,groundLayer);
+    }
+
     void HandleAnimations()
     {
         //Conector de valores generales con parámetros de cambios de animación
@@ -98,7 +110,11 @@ public class playerControlle2D : MonoBehaviour
         
         if (context.started)
         {
-            playerRB.AddForce(Vector3.up * jumpforce, ForceMode2D.Impulse);
+            if (isGrounded)
+            {
+                playerRB.AddForce(Vector3.up * jumpforce, ForceMode2D.Impulse);
+
+            }
         }
         
     
